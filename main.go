@@ -57,4 +57,20 @@ func main() {
 	// unlike the var declaration 
 	shortHand := "This is a shorthand variables assignment and declaration!"
 	fmt.Println(shortHand)
+
+	// declared variables without explicit values will get their "zero" value
+	// 0, false, and empty string for numeric, bool, and string types respectively
+	var num int
+	var booool bool 
+	var str string
+	fmt.Println(num, booool, str)
+
+	// assignment between different types requires explicit conversion
+	toBeFloat := -64
+	aFloat := float64(toBeFloat)
+	fmt.Println(aFloat)
+
+	// constants cannot use the := syntax
+	const PI = 3.14
+	fmt.Println(PI)
 }
