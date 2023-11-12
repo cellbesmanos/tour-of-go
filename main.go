@@ -4,6 +4,8 @@ import (
 	"cellbesmanos/exercise"
 	"fmt"
 	"math"
+	"runtime"
+	"time"
 )
 
 // returns the total sum of the numbers from 1 up to the "to" parameter
@@ -37,6 +39,24 @@ func pow(x, n, lim float64) float64 {
 	return lim
 }
 
+// the deferred part of the code will only execute once all the logic within the surrounding
+// is done
+func sampleDefer() {
+		// sample defer
+		defer fmt.Println("World!")
+		fmt.Println("Hello")
+}
+
+func stackedDefers() {
+	fmt.Println("counting")
+
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
+	fmt.Println("done")
+}
+
 func main() {
 	fmt.Println("Hello World!")
 
@@ -54,4 +74,29 @@ func main() {
 	fmt.Println(pow(3, 2, 10), pow(3, 3, 20))
 
 	fmt.Println(exercise.NumWithClosestSquareTo(20))
+
+	fmt.Println("This Go program runs on...")
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("OS X!")
+	case "linux":
+		fmt.Println("Linux!")
+	default:
+		fmt.Printf("%s!\n", os)
+	}
+
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("Good morning!")
+	case t.Hour() < 17:
+		fmt.Println("Good afternoon!")
+	default:
+		fmt.Println("Good evening!")
+	}	
+
+	sampleDefer()
+
+	// as the name implies, it follows the stack data structure in handling defers, LIFO
+	stackedDefers()
 }
